@@ -5,7 +5,7 @@ Responsibilities:
 	implement: 
 			main.c: 		Cong Shen
 		TASK 1: expenseSheet.c: 	group member 1
-		TASK 2: mealCalc.c: 		group member 2
+		TASK 2: mealCalc.c: 		Farid Vakili
 		TASK 3: finalCalc.c:		group member 3
 	
 	unit-testing and debugging (and input validation?): group member 4
