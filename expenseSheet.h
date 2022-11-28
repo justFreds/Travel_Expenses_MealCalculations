@@ -23,6 +23,7 @@ struct expenses
     //rows: day  (0 == day1)
     //col:  meal (0 == breakfast, 1 == lunch, 2 == dinner)
     double meals[30][3];
+    double total_meals, total_allowable_meals;
 };
 
 typedef struct expenses Expenses;
