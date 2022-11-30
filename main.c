@@ -9,7 +9,9 @@ int main()
     void printExpenses(Expenses *e);
     void getMeals(Expenses *e);
     void printMeals(Expenses *e);
-    
+    void totalIncurred(Expenses *e);
+    void totalAllowable(Expenses *e);
+    void totalBill(Expenses *e);    
     Expenses trip1; // the struct holding all expenses
     Expenses *tripPtr = &trip1; //a pointer to pass the struct by reference into functions
     
@@ -32,7 +34,7 @@ int main()
     //get user input for each relevant meal
     getMeals(tripPtr);
     //print the meals as a grid (for testing)
-    printMeals(tripPtr);
+    //printMeals(tripPtr);
 
     //****** TASK 3 ******
     //implement "finalCalc"
