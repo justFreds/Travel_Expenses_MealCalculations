@@ -19,12 +19,11 @@ void totalSavedAndOwed(char* str, double mealCost, double *total_owed_meals, dou
 void getMeals(Expenses *e){
     //reset all meals to 0
     e->total_meals = 0;
-    e->total_allowable_meals = 0;
     e->total_owed_meals = 0;
     e->total_saved_meals = 0;
     for (int i = 0; i <= 30; i++)
         for (int j = 0; j < 3; j++)
-            e->meals[i][j] = 0;    
+            e->meals[i][j] = 0;
     //fill out the array (price of each meal) based on user input
     //rows are days (0 is day 1)
     //cols are meals (0 = breakfast, 1 = lunch, 2 = dinner)
@@ -40,9 +39,9 @@ void getMeals(Expenses *e){
 */
     if(e->departTime < 7) {
         //tally allowable meals
-        e->total_allowable_meals += COMPED_BREAKFAST;
-        e->total_allowable_meals += COMPED_LUNCH;
-        e->total_allowable_meals += COMPED_DINNER;
+        // e->total_allowable_meals += COMPED_BREAKFAST;
+        // e->total_allowable_meals += COMPED_LUNCH;
+        // e->total_allowable_meals += COMPED_DINNER;
 
         printf("\nDay %d meals: \n", day);
         for(int i = 0; i < 3; i++){
@@ -56,7 +55,7 @@ void getMeals(Expenses *e){
                     printf("Error: Please input valid price!\n");
                 }
             } while(!parsed_correct);
-            totalSavedAndOwed(mealType[i], mealCost, &e->total_owed_meals, &e->total_saved_meals);  
+            totalSavedAndOwed(mealType[i], mealCost, &e->total_owed_meals, &e->total_saved_meals);
             e->meals[0][i] = mealCost;
             e->total_meals += mealCost;
     }
@@ -71,8 +70,8 @@ void getMeals(Expenses *e){
     }
     else if(e->departTime >= 7 && e->departTime < 12) {
         //tally allowable meals
-        e->total_allowable_meals += COMPED_LUNCH;
-        e->total_allowable_meals += COMPED_DINNER;
+        // e->total_allowable_meals += COMPED_LUNCH;
+        // e->total_allowable_meals += COMPED_DINNER;
         printf("\nDay %d meals: \n", day);
         for(int i = 1; i < 3; i++){
             do {
@@ -85,14 +84,14 @@ void getMeals(Expenses *e){
                     printf("Error: Please input valid price!\n");
                 }
             } while(!parsed_correct);
-            totalSavedAndOwed(mealType[i], mealCost, &e->total_owed_meals, &e->total_saved_meals);           
+            totalSavedAndOwed(mealType[i], mealCost, &e->total_owed_meals, &e->total_saved_meals);
             e->meals[0][i] = mealCost;
             e->total_meals += mealCost;
-        }      
+        }
     }
     else if(e->departTime >= 12 && e->departTime < 18) {
         //tally allowable meals
-        e->total_allowable_meals += COMPED_DINNER;
+        // e->total_allowable_meals += COMPED_DINNER;
         printf("\nDay %d meals: \n", day);
         for(int i = 2; i < 3; i++){
             do {
@@ -105,7 +104,7 @@ void getMeals(Expenses *e){
                     printf("Error: Please input valid price!\n");
                 }
             } while(!parsed_correct);
-            totalSavedAndOwed(mealType[i], mealCost, &e->total_owed_meals, &e->total_saved_meals);       
+            totalSavedAndOwed(mealType[i], mealCost, &e->total_owed_meals, &e->total_saved_meals);
             e->meals[0][i] = mealCost;
             e->total_meals += mealCost;
         }
@@ -117,9 +116,9 @@ void getMeals(Expenses *e){
 */
     for(int i = 1; i <= e->wholeDays; i++) {
         //tally allowed meals
-        e->total_allowable_meals += COMPED_BREAKFAST;
-        e->total_allowable_meals += COMPED_LUNCH;
-        e->total_allowable_meals += COMPED_DINNER;
+        // e->total_allowable_meals += COMPED_BREAKFAST;
+        // e->total_allowable_meals += COMPED_LUNCH;
+        // e->total_allowable_meals += COMPED_DINNER;
         printf("\nDay %d meals: \n", day);
         for(int j = 0; j < 3; j++){
             do {
@@ -132,7 +131,7 @@ void getMeals(Expenses *e){
                     printf("Error: Please input valid price!\n");
                 }
             } while(!parsed_correct);
-            totalSavedAndOwed(mealType[i], mealCost, &e->total_owed_meals, &e->total_saved_meals);            
+            totalSavedAndOwed(mealType[i], mealCost, &e->total_owed_meals, &e->total_saved_meals);
             e->meals[i][j] = mealCost;
             e->total_meals += mealCost;
         }
@@ -144,10 +143,10 @@ void getMeals(Expenses *e){
 */
     if(e->arriveTime > 19) {
         //tally allowed meals
-        e->total_allowable_meals += COMPED_BREAKFAST;
-        e->total_allowable_meals += COMPED_LUNCH;
-        e->total_allowable_meals += COMPED_DINNER;
-        printf("\nDay %d meals: \n", (day));         
+        // e->total_allowable_meals += COMPED_BREAKFAST;
+        // e->total_allowable_meals += COMPED_LUNCH;
+        // e->total_allowable_meals += COMPED_DINNER;
+        printf("\nDay %d meals: \n", (day));
         for(int i = 0; i < 3; i++){
             do {
                 printf("How much was %s: ", mealType[i]);
@@ -161,12 +160,12 @@ void getMeals(Expenses *e){
             } while(!parsed_correct);
             totalSavedAndOwed(mealType[i], mealCost, &e->total_owed_meals, &e->total_saved_meals);
             e->meals[e->totalDays-1][i] = mealCost;
-            e->total_meals += mealCost;   
-        }       
+            e->total_meals += mealCost;
+        }
     }
     else if(e->arriveTime > 13 && e->arriveTime <= 19) {
-        e->total_allowable_meals += COMPED_BREAKFAST;
-        e->total_allowable_meals += COMPED_LUNCH;
+        // e->total_allowable_meals += COMPED_BREAKFAST;
+        // e->total_allowable_meals += COMPED_LUNCH;
         printf("\nDay %d meals: \n", (day));
         for(int i = 0; i < 2; i++){
             do {
@@ -181,12 +180,12 @@ void getMeals(Expenses *e){
             } while(!parsed_correct);
             totalSavedAndOwed(mealType[i], mealCost, &e->total_owed_meals, &e->total_saved_meals);
             e->meals[e->totalDays-1][i] = mealCost;
-            e->total_meals += mealCost;               
+            e->total_meals += mealCost;
         }
     }
     else if(e->arriveTime > 8 && e->arriveTime <= 13) {
-        e->total_allowable_meals += COMPED_BREAKFAST;
-        printf("\nDay %d meals: \n", (day));        
+        // e->total_allowable_meals += COMPED_BREAKFAST;
+        printf("\nDay %d meals: \n", (day));
         for(int i = 0; i < 1; i++){
             do {
                 printf("How much was %s: ", mealType[i]);
@@ -200,21 +199,21 @@ void getMeals(Expenses *e){
             } while(!parsed_correct);
             totalSavedAndOwed(mealType[i], mealCost, &e->total_owed_meals, &e->total_saved_meals);
             e->meals[e->totalDays-1][i] = mealCost;
-            e->total_meals += mealCost; 
+            e->total_meals += mealCost;
         }
-    }        
+    }
 }
 //print the array for testing
 void printMeals(Expenses *e){
     printf("\n");
     for (int i = 0; i < e->totalDays; i++){
         for (int j = 0; j < 3; j++){
-            printf("%.2lf ", e->meals[i][j]);
+            printf("$%.2lf ", e->meals[i][j]);
         }
         printf("\n");
     }
-    printf("\nTotal Allowable Meals: $%.2lf\n", e->total_allowable_meals);
-    printf("Total Cost of Meals: $%.2lf\n", e->total_meals);
+    // printf("\nTotal Allowable Meals: $%.2lf\n", e->total_allowable_meals);
+    printf("\nTotal Cost of Meals: $%.2lf\n", e->total_meals);
     printf("Total owed: $%.2lf\nTotal saved: $%.2lf\n", e->total_owed_meals, e->total_saved_meals);
 }
 //_____5.2______\n\0
@@ -256,7 +255,7 @@ bool parse_float(char *str, double *floatNumber) {
     //end the array
     float_buffer[float_chars] = '\0';
     //ignore rest of whitespace
-    while(isspace(str[i])) i++;    
+    while(isspace(str[i])) i++;
     //if string doesn't end with \0 complain
     if(str[i] != '\0') return false;
     //convert string into float and assign the to number passed thru
