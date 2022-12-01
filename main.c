@@ -14,6 +14,11 @@ int main()
     void totalBill(Expenses *e);    
     Expenses trip1; // the struct holding all expenses
     Expenses *tripPtr = &trip1; //a pointer to pass the struct by reference into functions
+
+    tripPtr->total_allowable_meals = 0;
+    tripPtr->total_meals = 0;
+    tripPtr->total_saved_meals = 0;
+    tripPtr->total_owed_meals = 0;
     
 
     printf("\n*********************************");

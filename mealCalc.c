@@ -11,7 +11,7 @@
 #define COMPED_DINNER 16.00
 
 bool parse_float(char *str, double *floatNumber);
-void totalSavedAndOwed(char* str, double mealCost, double *total_owed, double *total_saved);
+void totalSavedAndOwed(char* str, double mealCost, double *total_owed_meals, double *total_saved_meals);
 
 //fill out the meals array based on user input
 //will depend on the hour parameters of depart/arrival days
@@ -20,8 +20,8 @@ void getMeals(Expenses *e){
     //reset all meals to 0
     e->total_meals = 0;
     e->total_allowable_meals = 0;
-    e->total_owed = 0;
-    e->total_saved = 0;
+    // e->total_owed_meals = 0;
+    // e->total_saved_meals = 0;
     for (int i = 0; i <= 30; i++)
         for (int j = 0; j < 3; j++)
             e->meals[i][j] = 0;    
@@ -56,7 +56,7 @@ void getMeals(Expenses *e){
                     printf("Error: Please input valid price!\n");
                 }
             } while(!parsed_correct);
-            totalSavedAndOwed(mealType[i], mealCost, &e->total_owed, &e->total_saved);  
+            totalSavedAndOwed(mealType[i], mealCost, &e->total_owed_meals, &e->total_saved_meals);  
             e->meals[0][i] = mealCost;
             e->total_meals += mealCost;
     }
@@ -85,7 +85,7 @@ void getMeals(Expenses *e){
                     printf("Error: Please input valid price!\n");
                 }
             } while(!parsed_correct);
-            totalSavedAndOwed(mealType[i], mealCost, &e->total_owed, &e->total_saved);           
+            totalSavedAndOwed(mealType[i], mealCost, &e->total_owed_meals, &e->total_saved_meals);           
             e->meals[0][i] = mealCost;
             e->total_meals += mealCost;
         }      
@@ -105,7 +105,7 @@ void getMeals(Expenses *e){
                     printf("Error: Please input valid price!\n");
                 }
             } while(!parsed_correct);
-            totalSavedAndOwed(mealType[i], mealCost, &e->total_owed, &e->total_saved);       
+            totalSavedAndOwed(mealType[i], mealCost, &e->total_owed_meals, &e->total_saved_meals);       
             e->meals[0][i] = mealCost;
             e->total_meals += mealCost;
         }
@@ -132,7 +132,7 @@ void getMeals(Expenses *e){
                     printf("Error: Please input valid price!\n");
                 }
             } while(!parsed_correct);
-            totalSavedAndOwed(mealType[i], mealCost, &e->total_owed, &e->total_saved);            
+            totalSavedAndOwed(mealType[i], mealCost, &e->total_owed_meals, &e->total_saved_meals);            
             e->meals[i][j] = mealCost;
             e->total_meals += mealCost;
         }
@@ -159,7 +159,7 @@ void getMeals(Expenses *e){
                     printf("Error: Please input valid price!\n");
                 }
             } while(!parsed_correct);
-            totalSavedAndOwed(mealType[i], mealCost, &e->total_owed, &e->total_saved);
+            totalSavedAndOwed(mealType[i], mealCost, &e->total_owed_meals, &e->total_saved_meals);
             e->meals[e->totalDays-1][i] = mealCost;
             e->total_meals += mealCost;   
         }       
@@ -179,7 +179,7 @@ void getMeals(Expenses *e){
                     printf("Error: Please input valid price!\n");
                 }
             } while(!parsed_correct);
-            totalSavedAndOwed(mealType[i], mealCost, &e->total_owed, &e->total_saved);
+            totalSavedAndOwed(mealType[i], mealCost, &e->total_owed_meals, &e->total_saved_meals);
             e->meals[e->totalDays-1][i] = mealCost;
             e->total_meals += mealCost;               
         }
@@ -198,7 +198,7 @@ void getMeals(Expenses *e){
                     printf("Error: Please input valid price!\n");
                 }
             } while(!parsed_correct);
-            totalSavedAndOwed(mealType[i], mealCost, &e->total_owed, &e->total_saved);
+            totalSavedAndOwed(mealType[i], mealCost, &e->total_owed_meals, &e->total_saved_meals);
             e->meals[e->totalDays-1][i] = mealCost;
             e->total_meals += mealCost; 
         }
@@ -215,7 +215,7 @@ void printMeals(Expenses *e){
     }
     printf("\nTotal Allowable Meals: $%.2lf\n", e->total_allowable_meals);
     printf("Total Cost of Meals: $%.2lf\n", e->total_meals);
-    printf("Total owed: $%.2lf\nTotal saved: $%.2lf\n", e->total_owed, e->total_saved);
+    printf("Total owed: $%.2lf\nTotal saved: $%.2lf\n", e->total_owed_meals, e->total_saved_meals);
 }
 //_____5.2______\n\0
 //float_buffer: 5.2
@@ -264,26 +264,26 @@ bool parse_float(char *str, double *floatNumber) {
 
     return true;
 }
-void totalSavedAndOwed(char* str, double mealCost, double *total_owed, double *total_saved) {
+void totalSavedAndOwed(char* str, double mealCost, double *total_owed_meals, double *total_saved_meals) {
     if(str =="breakfast") {
             if(mealCost > COMPED_BREAKFAST) {
-                *total_owed += (mealCost - COMPED_BREAKFAST);
+                *total_owed_meals += (mealCost - COMPED_BREAKFAST);
             } else if (mealCost < COMPED_BREAKFAST) {
-                *total_saved += (COMPED_BREAKFAST - mealCost);
+                *total_saved_meals += (COMPED_BREAKFAST - mealCost);
             }
         }
         if(str=="lunch") {
             if(mealCost > COMPED_LUNCH) {
-                *total_owed += (mealCost - COMPED_LUNCH);
+                *total_owed_meals += (mealCost - COMPED_LUNCH);
             } else if (mealCost < COMPED_LUNCH) {
-                *total_saved = (COMPED_LUNCH - mealCost);
+                *total_saved_meals = (COMPED_LUNCH - mealCost);
             }
         }
         if(str=="dinner") {
             if(mealCost > COMPED_DINNER) {
-                *total_owed += (mealCost - COMPED_DINNER);
+                *total_owed_meals += (mealCost - COMPED_DINNER);
             } else if (mealCost < COMPED_DINNER) {
-                *total_saved += (COMPED_DINNER - mealCost);
+                *total_saved_meals += (COMPED_DINNER - mealCost);
             }
         }
 }
