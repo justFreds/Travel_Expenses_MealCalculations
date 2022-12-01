@@ -20,8 +20,8 @@ void getMeals(Expenses *e){
     //reset all meals to 0
     e->total_meals = 0;
     e->total_allowable_meals = 0;
-    // e->total_owed_meals = 0;
-    // e->total_saved_meals = 0;
+    e->total_owed_meals = 0;
+    e->total_saved_meals = 0;
     for (int i = 0; i <= 30; i++)
         for (int j = 0; j < 3; j++)
             e->meals[i][j] = 0;    
