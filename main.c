@@ -34,7 +34,7 @@ int main()
     //get user input for each relevant meal
     getMeals(tripPtr);
     //print the meals as a grid (for testing)
-    //printMeals(tripPtr);
+    printMeals(tripPtr);
 
     //****** TASK 3 ******
     //implement "finalCalc"

@@ -12,7 +12,6 @@
 
 bool parse_float(char *str, double *floatNumber);
 void totalSavedAndOwed(char* str, double mealCost, double *total_owed, double *total_saved);
-void printMeals(Expenses *e);
 
 //fill out the meals array based on user input
 //will depend on the hour parameters of depart/arrival days
@@ -23,23 +22,19 @@ void getMeals(Expenses *e){
     e->total_allowable_meals = 0;
     e->total_owed = 0;
     e->total_saved = 0;
-
     for (int i = 0; i <= 30; i++)
         for (int j = 0; j < 3; j++)
-            e->meals[i][j] = 0;
-    
+            e->meals[i][j] = 0;    
     //fill out the array (price of each meal) based on user input
     //rows are days (0 is day 1)
     //cols are meals (0 = breakfast, 1 = lunch, 2 = dinner)
     //ex: e->meals[0][1] refers to lunch on the 1st (departure) day
     char *mealType[] = {"breakfast", "lunch", "dinner"};
-
     double mealCost;
     int day = 1;
     bool parsed_correct = true;
 
-    fflush(stdin);
-/*
+    fflush(stdin);/*
     ****FIRST DAY OF TRIP****
         CALCULATING COMPED MEALS BASED ON DEPARTURE TIME
 */
@@ -65,8 +60,6 @@ void getMeals(Expenses *e){
             e->meals[0][i] = mealCost;
             e->total_meals += mealCost;
     }
-
-
                                 // printf("\nDay 1 meals: \n");
                                 // //ask for meal costs
                                 // for(int i = 0; i < 3; i++){
@@ -80,7 +73,6 @@ void getMeals(Expenses *e){
         //tally allowable meals
         e->total_allowable_meals += COMPED_LUNCH;
         e->total_allowable_meals += COMPED_DINNER;
-
         printf("\nDay %d meals: \n", day);
         for(int i = 1; i < 3; i++){
             do {
@@ -101,7 +93,6 @@ void getMeals(Expenses *e){
     else if(e->departTime >= 12 && e->departTime < 18) {
         //tally allowable meals
         e->total_allowable_meals += COMPED_DINNER;
-
         printf("\nDay %d meals: \n", day);
         for(int i = 2; i < 3; i++){
             do {
@@ -129,7 +120,6 @@ void getMeals(Expenses *e){
         e->total_allowable_meals += COMPED_BREAKFAST;
         e->total_allowable_meals += COMPED_LUNCH;
         e->total_allowable_meals += COMPED_DINNER;
-
         printf("\nDay %d meals: \n", day);
         for(int j = 0; j < 3; j++){
             do {
@@ -148,7 +138,6 @@ void getMeals(Expenses *e){
         }
         day++;
     }
-
 /*
     ****LAST DAY OF TRIP****
         CALCULATING COMPED MEALS BASED ON ARRIVAL TIME
@@ -173,8 +162,7 @@ void getMeals(Expenses *e){
             totalSavedAndOwed(mealType[i], mealCost, &e->total_owed, &e->total_saved);
             e->meals[e->totalDays-1][i] = mealCost;
             e->total_meals += mealCost;   
-        }        
-
+        }       
     }
     else if(e->arriveTime > 13 && e->arriveTime <= 19) {
         e->total_allowable_meals += COMPED_BREAKFAST;
@@ -214,29 +202,25 @@ void getMeals(Expenses *e){
             e->meals[e->totalDays-1][i] = mealCost;
             e->total_meals += mealCost; 
         }
-    }
-    printMeals(e);        
+    }        
 }
-
 //print the array for testing
 void printMeals(Expenses *e){
+    printf("\n");
     for (int i = 0; i < e->totalDays; i++){
         for (int j = 0; j < 3; j++){
             printf("%.2lf ", e->meals[i][j]);
         }
         printf("\n");
     }
-
-    printf("Total Allowable Meals: $%.2lf\n", e->total_allowable_meals);
+    printf("\nTotal Allowable Meals: $%.2lf\n", e->total_allowable_meals);
     printf("Total Cost of Meals: $%.2lf\n", e->total_meals);
-    printf("Total owed: %.2lf\nTotal saved: %.2lf\n", e->total_owed, e->total_saved);
+    printf("Total owed: $%.2lf\nTotal saved: $%.2lf\n", e->total_owed, e->total_saved);
 }
 //_____5.2______\n\0
 //float_buffer: 5.2
 bool parse_float(char *str, double *floatNumber) {
-
     int i = 0;
-
     while(isspace(str[i])) i++;
     //check if i reached end of string
     int length = strlen(str);
@@ -244,7 +228,6 @@ bool parse_float(char *str, double *floatNumber) {
 
     char float_buffer[BUFFER_SIZE];
     int float_chars = 0;
-
                 //  store negative
                 // if(str[i] == '-') {
                 //     float_buffer[float_chars];
@@ -253,7 +236,6 @@ bool parse_float(char *str, double *floatNumber) {
 
                 //     if(!isdigit(str[i])) return false;
                 // }
-
     while(i<length && !isspace(str[i])) {
         //store dot but return false if for more than 1
         int periodLength = 0;
@@ -266,28 +248,22 @@ bool parse_float(char *str, double *floatNumber) {
         }
         //check if number after dot is digit
         if(!isdigit(str[i])) return false;
-
         //store the numbers in the buffer
         float_buffer[float_chars] = str[i];
         float_chars++;
         i++;
     }
-
     //end the array
     float_buffer[float_chars] = '\0';
-
     //ignore rest of whitespace
-    while(isspace(str[i])) i++;
-    
+    while(isspace(str[i])) i++;    
     //if string doesn't end with \0 complain
     if(str[i] != '\0') return false;
-
     //convert string into float and assign the to number passed thru
     *floatNumber = atof(float_buffer);
 
     return true;
 }
-
 void totalSavedAndOwed(char* str, double mealCost, double *total_owed, double *total_saved) {
     if(str =="breakfast") {
             if(mealCost > COMPED_BREAKFAST) {
