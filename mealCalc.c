@@ -10,7 +10,7 @@
 #define COMPED_LUNCH 12.00
 #define COMPED_DINNER 16.00
 
-bool parse_float(char *str, double *floatNumber);
+bool parse_double(char *str, double *floatNumber);
 void totalSavedAndOwed(char* str, double mealCost, double *total_owed_meals, double *total_saved_meals);
 
 //fill out the meals array based on user input
@@ -29,6 +29,7 @@ void getMeals(Expenses *e){
     double mealCost;
     int day = 1;
     bool parsed_correct = true;
+    char buffer[BUFFER_SIZE];
 
     fflush(stdin);
 /*
@@ -38,11 +39,9 @@ void getMeals(Expenses *e){
         printf("\nDay %d meals: \n", day);        
         for(int i = 0; i < 3; i++){
             do {
-                printf("How much was %s: ", mealType[i]);
-                char buffer[BUFFER_SIZE];
+                printf("How much was %s: ", mealType[i]);                
                 fgets(buffer, BUFFER_SIZE, stdin);
-
-                parsed_correct = parse_float(buffer, &mealCost);
+                parsed_correct = parse_double(buffer, &mealCost);
                 if(!parsed_correct) {
                     printf("Error: Please input valid price!\n");
                 }
@@ -57,10 +56,9 @@ void getMeals(Expenses *e){
         for(int i = 1; i < 3; i++){
             do {
                 printf("How much was %s: ", mealType[i]);
-                char buffer[BUFFER_SIZE];
                 fgets(buffer, BUFFER_SIZE, stdin);
 
-                parsed_correct = parse_float(buffer, &mealCost);
+                parsed_correct = parse_double(buffer, &mealCost);
                 if(!parsed_correct) {
                     printf("Error: Please input valid price!\n");
                 }
@@ -75,10 +73,9 @@ void getMeals(Expenses *e){
         for(int i = 2; i < 3; i++){
             do {
                 printf("How much was %s: ", mealType[i]);
-                char buffer[BUFFER_SIZE];
                 fgets(buffer, BUFFER_SIZE, stdin);
 
-                parsed_correct = parse_float(buffer, &mealCost);
+                parsed_correct = parse_double(buffer, &mealCost);
                 if(!parsed_correct) {
                     printf("Error: Please input valid price!\n");
                 }
@@ -97,10 +94,9 @@ void getMeals(Expenses *e){
         for(int j = 0; j < 3; j++){
             do {
                 printf("How much was %s: ", mealType[j]);
-                char buffer[BUFFER_SIZE];
                 fgets(buffer, BUFFER_SIZE, stdin);
 
-                parsed_correct = parse_float(buffer, &mealCost);
+                parsed_correct = parse_double(buffer, &mealCost);
                 if(!parsed_correct) {
                     printf("Error: Please input valid price!\n");
                 }
@@ -119,10 +115,9 @@ void getMeals(Expenses *e){
         for(int i = 0; i < 3; i++){
             do {
                 printf("How much was %s: ", mealType[i]);
-                char buffer[BUFFER_SIZE];
                 fgets(buffer, BUFFER_SIZE, stdin);
 
-                parsed_correct = parse_float(buffer, &mealCost);
+                parsed_correct = parse_double(buffer, &mealCost);
                 if(!parsed_correct) {
                     printf("Error: Please input valid price!\n");
                 }
@@ -137,10 +132,9 @@ void getMeals(Expenses *e){
         for(int i = 0; i < 2; i++){
             do {
                 printf("How much was %s: ", mealType[i]);
-                char buffer[BUFFER_SIZE];
                 fgets(buffer, BUFFER_SIZE, stdin);
 
-                parsed_correct = parse_float(buffer, &mealCost);
+                parsed_correct = parse_double(buffer, &mealCost);
                 if(!parsed_correct) {
                     printf("Error: Please input valid price!\n");
                 }
@@ -155,10 +149,9 @@ void getMeals(Expenses *e){
         for(int i = 0; i < 1; i++){
             do {
                 printf("How much was %s: ", mealType[i]);
-                char buffer[BUFFER_SIZE];
                 fgets(buffer, BUFFER_SIZE, stdin);
 
-                parsed_correct = parse_float(buffer, &mealCost);
+                parsed_correct = parse_double(buffer, &mealCost);
                 if(!parsed_correct) {
                     printf("Error: Please input valid price!\n");
                 }
@@ -183,7 +176,7 @@ void printMeals(Expenses *e){
 }
 //_____5.2______\n\0
 //float_buffer: 5.2
-bool parse_float(char *str, double *floatNumber) {
+bool parse_double(char *str, double *floatNumber) {
     int i = 0;
     while(isspace(str[i])) i++;
     //check if i reached end of string

@@ -1,12 +1,11 @@
 #ifndef EXPENSESHEET_H
 #define EXPENSESHEET_H
-
 struct expenses
 {
     
     int wholeDays;//the number of "whole" days NOT INCLUDING depart and arrive (can be 0)
-    int departTime;//the hour of departure (0-23)
-    int arriveTime;//the hour of arrival to home (0-23)
+    double departTime;//the hour of departure (0-23)
+    double arriveTime;//the hour of arrival to home (0-23)
 
     int totalDays;//the total number of days including depart and arrive
 
